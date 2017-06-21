@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layout>
+    <!--[+] index action layout -->
+    <adminhtml_cajademo_index>
+        <reference name="head">
+            <action method="addItem"><type>js_css</type><name>caja/css/caja_cajademo.css</name></action>
+            <action method="addjs"><name>caja/caja_cajademo.js</name></action>
+        </reference>
+        <reference name="menu">
+            <action method="setActive">
+                <menupath>cajademo</menupath>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="cajademo/adminhtml_cajademo" name="cajademo_index" />
+        </reference>
+    </adminhtml_cajademo_index>
+    <!--[-] index action layout -->
+    <!--[+] doSkus action layout -->
+    <adminhtml_cajademo_doskus>
+        <reference name="menu">
+            <action method="setActive">
+                <menupath>cajademo</menupath>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="cajademo/adminhtml_doskus" name="cajademo_doskus" />
+        </reference>
+    </adminhtml_cajademo_doskus>
+    <!--[-] doSkus action layout -->
+    <!--[+] doOrders action layout -->
+    <adminhtml_cajademo_doorders>
+        <reference name="menu">
+            <action method="setActive">
+                <menupath>cajademo</menupath>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="cajademo/adminhtml_doorders" name="cajademo_doorders" />
+        </reference>
+    </adminhtml_cajademo_doorders>
+    <!--[-] doOrders action layout -->
+
+    <adminhtml_catalog_product_edit>
+        <reference name="head">
+            <action method="addjs"><name>caja/caja_cajademo.js</name></action>
+        </reference>
+        <reference name="product_tabs">
+            <action method="addTab">
+                <name>locations</name>
+                <block>cajademo/adminhtml_catalog_product_edit_tab</block>
+            </action>
+        </reference>
+    </adminhtml_catalog_product_edit>
+
+    <adminhtml_catalog_product_locations>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="cajademo/adminhtml_catalog_product_edit_tab_locations" name="catalog_product_edit_tab_locations"/>
+        </block>
+    </adminhtml_catalog_product_locations>
+</layout>

@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magento
+ */
+-->
+
+<config>
+    <modules>
+        <Caja_Cajademo>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Caja_Cajademo>
+    </modules>
+</config>

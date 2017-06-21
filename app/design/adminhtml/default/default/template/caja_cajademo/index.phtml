@@ -1,0 +1,66 @@
+
+<div class="content-header">
+    <table cellspacing="0">
+        <tr>
+            <td style="width:50%;">
+                <h3 class="icon-head head-products"><?php echo $this->getHeaderText(); ?></h3>
+            </td>
+            <td class="a-right">
+                <?php echo $this->getButtonsHtml() ?>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<?php if (is_array($this->getZoneInfo()) && array_key_exists('errorCode', $this->getZoneInfo())) : ?>
+    <div class="caja-info-message" id="caja-info-message">
+        <p><?php echo 'Error: '. $this->getZoneInfo()['externalErrorMessage']; ?></p>
+    </div>
+<?php else : ?>
+    <div class="caja-dashboard">
+        <h2><?php echo $this->getZoneInfo()['name']; ?></h2>
+        <?php foreach ($this->getZoneStructure() as $key => $value) : ?>
+            <div class="row" id="row-<?php echo $key; ?>">
+                <?php foreach ($value as $k => $v) : ?>
+                    <div class="col col-<?php echo $this->getMaxColNumber(); ?>">
+                        <div class="inner-block" id="<?php echo 'zone-'. $v['x'] .'-'. $v['y'] .'-'. $v['z']; ?>" title="<?php echo 'zone-'. $v['x'] .'-'. $v['y'] .'-'. $v['z']; ?>">
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+        <?php endforeach; ?>
+
+        <div class="zones-message" id="zones-message" style="display: none"></div>
+
+        <div id="popup-qty">
+            <div class="popup-header" id="popup-header">
+                <span id="popup-qty-close" onclick="caja_popupHide()">x</span>
+                <h3>Picked Qty</h3>
+            </div>
+            <div class="popup-body" id="popup-body">
+                <input type="text" id="caja_piked_qty" name="caja_piked_qty" placeholder="Qty"/>
+                <input type="hidden" id="caja_orderline" name="caja_orderline" value=""/>
+                <input type="hidden" id="caja_cell_id" name="caja_cell_id" value=""/>
+                <button class="popup-submit" id="popup-submit" onclick="caja_completeOrderLine('<?php echo $this->getUrlForOrderLineRequest(); ?>')">Complete</button>
+            </div>
+            <div class="popup-footer" id="popup-footer">
+                <img id="popup-loader" src="<?php echo $this->getSkinUrl('images/caja_popup_loader.gif'); ?>" alt="" style="display: none" />
+                <div class="popup-message" id="popup-message" style="display: none"></div>
+            </div>
+        </div>
+
+        <div class="cboard-loading-mask" id="cboard-loading-mask" style="display: none">
+            <p class="cboard_loading_mask_loader" id="cboard_loading_mask_loader"><img src="<?php echo $this->getSkinUrl('images/ajax-loader-tr.gif'); ?>" alt="Loading..."><br>Please wait...</p>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        function getZoneStatusInterval() {
+            var url = '<?php echo $this->getUrlForZoneStatusRequest(); ?>';
+            caja_getZoneStatus(url);
+        }
+
+        var timerId = setInterval(getZoneStatusInterval, 10000);
+        getZoneStatusInterval();
+    </script>
+<?php endif; ?>

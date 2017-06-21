@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+
+<config>
+    <menu>
+        <cajademo translate="title" module="cajademo">
+            <title>Caja-Dashboard</title>
+            <sort_order>1000</sort_order>
+            <action>adminhtml/cajademo</action>
+            <depends>
+                <module>Caja_Cajademo</module>
+            </depends>
+        </cajademo>
+    </menu>
+</config>
